@@ -14,5 +14,19 @@ class Shift
             "Shift Unknown"
         end
     end
+    
+    def display_shift_start_time
+        shift_start_time.strftime("%d-%m-%Y %H:%M")
+    end
+
+    def shift_start_time
+        Time.new(2018, 10, 17, shifts[@shift_number][:start])
+    end
+
+    def shifts
+        { 1 => { start: 9.00, end: 15.00 },
+          2 => { start: 20.00, end: 8.00 }
+        }
+    end
 end
 
