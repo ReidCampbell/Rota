@@ -45,9 +45,9 @@ class Shift
         shift_end_time.strftime("%d-%m-%Y %H:%M")
     end
 
-    
-
-
-
+    def total_hours
+        hours = shift_end_time - shift_start_time
+        hours / 3600
+    end
 end
 

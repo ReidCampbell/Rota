@@ -44,4 +44,18 @@ RSpec.describe Shift do
             expect(shift.display_shift_end_time).to eq "18-10-2018 08:00"
         end
     end
+
+    context "getting total hours" do
+        it "calculated the correct number of hours for shift 1" do
+            shift = Shift.new(1) 
+            expect(shift.total_hours).to eq 6
+        end
+
+        it "calculated the correct number of hours for shift 2" do
+            shift = Shift.new(2) 
+            expect(shift.total_hours).to eq 12
+        end
+    end
+
+
 end
