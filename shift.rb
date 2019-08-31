@@ -1,16 +1,17 @@
 require 'active_support/time'
-
+require 'pry'
 
 class Shift
     attr_reader :shift_number
 
-    def initialize(shift_number)
+    def initialize(shift_number, time)
         @shift_number = shift_number
+        @time = time
     end
     
     def shifts
-        { 1 => { start: 9.00, end: 15.00 },
-          2 => { start: 20.00, end: 8.00 }
+        { 1 => { start: "9:00", end: "15:00" },
+          2 => { start: "20:00", end: "8:00" }
         }
     end
 
@@ -30,7 +31,13 @@ class Shift
     end
 
     def shift_start_time
-        Time.new(2018, 10, 17, shifts[@shift_number][:start])
+       t = @time.to_s + " " + shifts[@shift_number][:start]
+       t.to_datetime
+
+    end
+
+    def self.shift_start_date
+        Date.new(2018, 10, 17)
     end
 
     def shift_end_time
@@ -47,5 +54,16 @@ class Shift
         hours = shift_end_time - shift_start_time
         hours / 3600
     end
+
+    def shift_rate(day)
+        if day.monday? || day.wednesday? || day.friday?
+            45
+        elsif day.tuesday? || day.thursday?
+            60
+        else
+            0
+        end
+    end
+    
 end
 
