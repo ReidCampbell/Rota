@@ -1,7 +1,9 @@
 require 'active_support/time'
 
+
 class Shift
     attr_reader :shift_number
+
     def initialize(shift_number)
         @shift_number = shift_number
     end
@@ -23,8 +25,8 @@ class Shift
         end
     end
     
-    def display_shift_start_time
-        shift_start_time.strftime("%d-%m-%Y %H:%M")
+    def display_shift_time(time)
+        time.strftime("%d-%m-%Y %H:%M")
     end
 
     def shift_start_time
@@ -39,10 +41,6 @@ class Shift
         else
             "Time Unknown"
         end
-    end
-
-    def display_shift_end_time
-        shift_end_time.strftime("%d-%m-%Y %H:%M")
     end
 
     def total_hours
