@@ -4,9 +4,10 @@ require 'pry'
 class Shift
     attr_reader :shift_number
 
-    def initialize(shift_number, time)
+    def initialize(shift_number, time, doctor)
         @shift_number = shift_number
         @time = time
+        @doctor = doctor
     end
     
     def shifts
@@ -33,7 +34,6 @@ class Shift
     def shift_start_time
        t = @time.to_s + " " + shifts[@shift_number][:start]
        t.to_datetime
-
     end
 
     def self.shift_start_date
@@ -51,17 +51,28 @@ class Shift
     end
 
     def total_hours
-        hours = shift_end_time - shift_start_time
-        hours / 3600
+        total_difference = shift_end_time.to_i - shift_start_time.to_i
+        total_difference / 3600
     end
 
-    def shift_rate(day)
-        if day.monday? || day.wednesday? || day.friday?
+    def shift_rate
+      m_w_f = ["Monday", "Wednesday", "Friday"]
+        if m_w_f.include?(get_day)
             45
-        elsif day.tuesday? || day.thursday?
-            60
         else
-            0
+            60
+        end
+    end
+
+    def get_day
+      @time.strftime("%A")
+    end
+
+    def department
+        if @shift_number == 1
+            "General Medicine"
+        else
+            "A&E"
         end
     end
     
