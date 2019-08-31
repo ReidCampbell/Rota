@@ -1,9 +1,10 @@
 class Doctor
-    attr_accessor :title, :employer
+    attr_accessor :title, :employer, :multiplier
 
-    def initialize(title, employer)
+    def initialize(title, employer, multiplier)
         @title = title
         @employer = employer
+        @multiplier = multiplier
     end
     
     def base_rate

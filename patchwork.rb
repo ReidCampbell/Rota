@@ -1,7 +1,6 @@
 require 'csv'
 require_relative 'shift'
 require_relative 'doctor'
-require_relative 'agency_doctor'
 
 class Patchwork
     def generate_csv
@@ -10,14 +9,12 @@ class Patchwork
         headers: ["Shift", "Start Date & Time", "End Date and Time", "Total Hours", "Shift Rate", "Total Payment", "Name of Agency/Hospital", "Name of Department"]
         ) do |csv| 
             Shift.shift_start_date.upto(Shift.shift_start_date + 7).each do |time| 
-                @doctor = Doctor.new("GP", "MWF Hospital")
-                @agency_doctor = AgencyDoctor.new("GP", "MWF Agency", 1.5)
-                @shift_one = Shift.new(1, time, @doctor)
-                @shift_two = Shift.new(2, time, @doctor)
+                @shift_one = Shift.new(1, time)
+                @shift_two = Shift.new(2, time)
 
                 unless weekend.include?(time.strftime("%A"))
-                    csv << [@shift_one.shift_number, @shift_one.display_shift_time(@shift_one.shift_start_time), @shift_one.display_shift_time(@shift_one.shift_end_time), @shift_one.total_hours, @shift_one.shift_rate, @doctor.employer, @shift_one.department]
-                    csv << [@shift_two.shift_number, @shift_two.display_shift_time(@shift_two.shift_start_time), @shift_two.display_shift_time(@shift_two.shift_end_time), @shift_two.total_hours,  @shift_two.shift_rate, @agency_doctor.employer, @shift_two.department]
+                    csv << [@shift_one.shift_number, @shift_one.display_shift_time(@shift_one.shift_start_time), @shift_one.display_shift_time(@shift_one.shift_end_time), @shift_one.total_hours, @shift_one.shift_rate, @shift_one.doctor.employer, @shift_one.department]
+                    csv << [@shift_two.shift_number, @shift_two.display_shift_time(@shift_two.shift_start_time), @shift_two.display_shift_time(@shift_two.shift_end_time), @shift_two.total_hours,  @shift_two.shift_rate, @shift_two.doctor.employer, @shift_two.department]
                 end
             end
         end
@@ -31,6 +28,8 @@ class Patchwork
         end_time = shift.shift_end_time + time.day   
         shift.display_shift_time(end_time)
     end
+
+    
 end
 
 make_csv = Patchwork.new

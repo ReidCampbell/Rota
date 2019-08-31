@@ -2,12 +2,12 @@ require 'active_support/time'
 require 'pry'
 
 class Shift
-    attr_reader :shift_number
+    attr_accessor :shift_number, :doctor
 
-    def initialize(shift_number, time, doctor)
+    def initialize(shift_number, time)
         @shift_number = shift_number
         @time = time
-        @doctor = doctor
+        @doctor = shift_doctor
     end
     
     def shifts
@@ -76,5 +76,18 @@ class Shift
         end
     end
     
+    def shift_doctor
+        m_w_f = ["Monday", "Wednesday", "Friday"]
+
+        if m_w_f.include?(get_day) && @shift_number == 1
+            @doctor = Doctor.new("GP", "MWF Hospital", 1) 
+        elsif m_w_f.include?(get_day) && @shift_number == 2
+            @doctor = Doctor.new("GP", "MWF Agency", 1.8)
+        elsif !m_w_f.include?(get_day) && @shift_number == 1
+            @doctor = Doctor.new("Surgeon", "TT Agency", 1.3)
+        else
+            @doctor = Doctor.new("Surgoen", "TT Hospital", 1)
+        end
+    end
 end
 
