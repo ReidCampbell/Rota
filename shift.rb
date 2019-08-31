@@ -1,5 +1,4 @@
 require 'active_support/time'
-require 'pry'
 
 class Shift
     attr_accessor :shift_number, :doctor
@@ -86,7 +85,22 @@ class Shift
         elsif !m_w_f.include?(get_day) && @shift_number == 1
             @doctor = Doctor.new("Surgeon", "TT Agency", 1.3)
         else
-            @doctor = Doctor.new("Surgoen", "TT Hospital", 1)
+            @doctor = Doctor.new("Surgeon", "TT Hospital", 1)
+        end
+    end
+
+    def total_shift_payment
+        if @shift_number == 1
+            shift_rate = @doctor.base_rate * @doctor.multiplier
+            shift_rate * total_hours
+        elsif @shift_number == 2
+            if @doctor.multiplier != 1
+            shift_rate = @doctor.base_rate * @doctor.multiplier
+            department_enchancer = @doctor.base_rate * 1.5
+            (shift_rate + department_enchancer) * total_hours
+            else 
+                (@doctor.base_rate * 1.5) * total_hours
+            end
         end
     end
 end

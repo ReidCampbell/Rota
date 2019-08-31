@@ -13,8 +13,8 @@ class Patchwork
                 @shift_two = Shift.new(2, time)
 
                 unless weekend.include?(time.strftime("%A"))
-                    csv << [@shift_one.shift_number, @shift_one.display_shift_time(@shift_one.shift_start_time), @shift_one.display_shift_time(@shift_one.shift_end_time), @shift_one.total_hours, @shift_one.shift_rate, @shift_one.doctor.employer, @shift_one.department]
-                    csv << [@shift_two.shift_number, @shift_two.display_shift_time(@shift_two.shift_start_time), @shift_two.display_shift_time(@shift_two.shift_end_time), @shift_two.total_hours,  @shift_two.shift_rate, @shift_two.doctor.employer, @shift_two.department]
+                    csv << [@shift_one.shift_number, @shift_one.display_shift_time(@shift_one.shift_start_time), @shift_one.display_shift_time(@shift_one.shift_end_time), @shift_one.total_hours, @shift_one.shift_rate, @shift_one.total_shift_payment, @shift_one.doctor.employer, @shift_one.department]
+                    csv << [@shift_two.shift_number, @shift_two.display_shift_time(@shift_two.shift_start_time), @shift_two.display_shift_time(@shift_two.shift_end_time), @shift_two.total_hours,  @shift_two.shift_rate, @shift_two.total_shift_payment, @shift_two.doctor.employer, @shift_two.department]
                 end
             end
         end
