@@ -1,0 +1,68 @@
+
+Doctor 
+- has grade
+    - has title
+    - hourly rate
+- knows hospital they work for
+
+
+Agency Doctor
+- has grade
+    - hourly rate
+    - title
+- knows agency works for
+- They have multiplier varies by Doctor
+
+Shift 
+- start date - 17th October 2018
+- start time
+- end date
+- end time
+- can be worked by either Doctor
+- worked at particular department
+- 2 shifts per day 
+- shift 1 9-15 General Medicine
+- shift 2 20-8 A&E Department - Enchanced multiplier of 1.5
+
+department
+- Certain department paid 1.5x base rate more
+- General Medicine
+- A&E Department - Enchanced multiplier of 1.5
+
+Shift 1
+- Mon, Wed, Fri
+    - 9.00 - 15.00
+    - worked by permanent doctor from MWF Hospital
+    - title of GP
+    - Pay is £45
+
+Shift 2
+- Mon, Wed, Fri
+    - 20.00 - 8.00
+    - worked by agency from MWF Agency
+    - Has multiplier of 1.8x
+
+Shift 1
+-Tues, Thurs
+    - 9.00 - 15.00
+    - title of surgeon
+    - hourly rate of £60
+    - worked by agency from "TT Agency" with multiplier 1.3x
+
+Shift 2
+-Tues, Thurs
+    - 20.00 - 8.00
+    - title of surgeon
+    - hourly rate of £60
+    - Worked by permanent doctor from "TT Hospital"
+
+
+Program
+
+- Shift start date and time
+- Shift end date and time
+- Total hours
+- Rate shift paid at
+- Total Payment
+- Name of agency / hospital that the doctor belongs to
+- Name of the department
