@@ -15,7 +15,7 @@ bundle install
 To generate CSV:
 
 ```
-ruby report.rb
+ruby generate_report.rb
 ```
 
 ### Tests

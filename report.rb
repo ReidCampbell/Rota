@@ -20,7 +20,3 @@ class Report
     end    
 end
 
-make_csv = Report.new
-make_csv.generate_csv
-
-
