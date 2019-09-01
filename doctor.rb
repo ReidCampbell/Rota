@@ -17,5 +17,4 @@ class Doctor
             0
         end
     end
-
 end
